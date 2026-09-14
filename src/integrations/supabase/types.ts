@@ -14,16 +14,442 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      alunos: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          id: string
+          identificador: string | null
+          nome: string
+          nome_exibicao: string | null
+          numero: number | null
+          saldo_pontos: number
+          status: string
+          turma_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          identificador?: string | null
+          nome: string
+          nome_exibicao?: string | null
+          numero?: number | null
+          saldo_pontos?: number
+          status?: string
+          turma_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          identificador?: string | null
+          nome?: string
+          nome_exibicao?: string | null
+          numero?: number | null
+          saldo_pontos?: number
+          status?: string
+          turma_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alunos_turma_id_fkey"
+            columns: ["turma_id"]
+            isOneToOne: false
+            referencedRelation: "turmas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      atividades: {
+        Row: {
+          created_at: string
+          data: string | null
+          descricao: string | null
+          disciplina: string | null
+          id: string
+          nome: string
+          prazo: string | null
+          status: string
+          turma_id: string | null
+          valor: number
+        }
+        Insert: {
+          created_at?: string
+          data?: string | null
+          descricao?: string | null
+          disciplina?: string | null
+          id?: string
+          nome: string
+          prazo?: string | null
+          status?: string
+          turma_id?: string | null
+          valor?: number
+        }
+        Update: {
+          created_at?: string
+          data?: string | null
+          descricao?: string | null
+          disciplina?: string | null
+          id?: string
+          nome?: string
+          prazo?: string | null
+          status?: string
+          turma_id?: string | null
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "atividades_turma_id_fkey"
+            columns: ["turma_id"]
+            isOneToOne: false
+            referencedRelation: "turmas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      auditoria: {
+        Row: {
+          aluno_id: string | null
+          data_hora: string
+          id: string
+          motivo: string | null
+          operacao: string
+          usuario_id: string | null
+          usuario_nome: string | null
+          valor_anterior: string | null
+          valor_novo: string | null
+        }
+        Insert: {
+          aluno_id?: string | null
+          data_hora?: string
+          id?: string
+          motivo?: string | null
+          operacao: string
+          usuario_id?: string | null
+          usuario_nome?: string | null
+          valor_anterior?: string | null
+          valor_novo?: string | null
+        }
+        Update: {
+          aluno_id?: string | null
+          data_hora?: string
+          id?: string
+          motivo?: string | null
+          operacao?: string
+          usuario_id?: string | null
+          usuario_nome?: string | null
+          valor_anterior?: string | null
+          valor_novo?: string | null
+        }
+        Relationships: []
+      }
+      avaliacoes: {
+        Row: {
+          created_at: string
+          data: string | null
+          descricao: string | null
+          disciplina: string | null
+          id: string
+          nome: string
+          turma_id: string | null
+          valor_maximo: number
+        }
+        Insert: {
+          created_at?: string
+          data?: string | null
+          descricao?: string | null
+          disciplina?: string | null
+          id?: string
+          nome: string
+          turma_id?: string | null
+          valor_maximo?: number
+        }
+        Update: {
+          created_at?: string
+          data?: string | null
+          descricao?: string | null
+          disciplina?: string | null
+          id?: string
+          nome?: string
+          turma_id?: string | null
+          valor_maximo?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "avaliacoes_turma_id_fkey"
+            columns: ["turma_id"]
+            isOneToOne: false
+            referencedRelation: "turmas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cartoes_nfc: {
+        Row: {
+          aluno_id: string
+          data_vinculacao: string
+          id: string
+          nfc_uid: string
+          status: string
+        }
+        Insert: {
+          aluno_id: string
+          data_vinculacao?: string
+          id?: string
+          nfc_uid: string
+          status?: string
+        }
+        Update: {
+          aluno_id?: string
+          data_vinculacao?: string
+          id?: string
+          nfc_uid?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cartoes_nfc_aluno_id_fkey"
+            columns: ["aluno_id"]
+            isOneToOne: false
+            referencedRelation: "alunos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      configuracoes: {
+        Row: {
+          id: number
+          nome_professor: string
+          permitir_saldo_negativo: boolean
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          nome_professor?: string
+          permitir_saldo_negativo?: boolean
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          nome_professor?: string
+          permitir_saldo_negativo?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      entregas_atividades: {
+        Row: {
+          aluno_id: string
+          atividade_id: string
+          data_entrega: string | null
+          id: string
+          nota: number | null
+          status: string
+        }
+        Insert: {
+          aluno_id: string
+          atividade_id: string
+          data_entrega?: string | null
+          id?: string
+          nota?: number | null
+          status?: string
+        }
+        Update: {
+          aluno_id?: string
+          atividade_id?: string
+          data_entrega?: string | null
+          id?: string
+          nota?: number | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entregas_atividades_aluno_id_fkey"
+            columns: ["aluno_id"]
+            isOneToOne: false
+            referencedRelation: "alunos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entregas_atividades_atividade_id_fkey"
+            columns: ["atividade_id"]
+            isOneToOne: false
+            referencedRelation: "atividades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notas_avaliacoes: {
+        Row: {
+          aluno_id: string
+          avaliacao_id: string
+          id: string
+          nota: number | null
+        }
+        Insert: {
+          aluno_id: string
+          avaliacao_id: string
+          id?: string
+          nota?: number | null
+        }
+        Update: {
+          aluno_id?: string
+          avaliacao_id?: string
+          id?: string
+          nota?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notas_avaliacoes_aluno_id_fkey"
+            columns: ["aluno_id"]
+            isOneToOne: false
+            referencedRelation: "alunos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notas_avaliacoes_avaliacao_id_fkey"
+            columns: ["avaliacao_id"]
+            isOneToOne: false
+            referencedRelation: "avaliacoes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: string
+          nome?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
+      transacoes: {
+        Row: {
+          aluno_id: string
+          data_hora: string
+          id: string
+          motivo: string | null
+          saldo_anterior: number
+          saldo_posterior: number
+          tipo: string
+          transaction_group_id: string | null
+          usuario_id: string | null
+          usuario_nome: string | null
+          valor: number
+        }
+        Insert: {
+          aluno_id: string
+          data_hora?: string
+          id?: string
+          motivo?: string | null
+          saldo_anterior: number
+          saldo_posterior: number
+          tipo: string
+          transaction_group_id?: string | null
+          usuario_id?: string | null
+          usuario_nome?: string | null
+          valor: number
+        }
+        Update: {
+          aluno_id?: string
+          data_hora?: string
+          id?: string
+          motivo?: string | null
+          saldo_anterior?: number
+          saldo_posterior?: number
+          tipo?: string
+          transaction_group_id?: string | null
+          usuario_id?: string | null
+          usuario_nome?: string | null
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transacoes_aluno_id_fkey"
+            columns: ["aluno_id"]
+            isOneToOne: false
+            referencedRelation: "alunos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      turmas: {
+        Row: {
+          ano: string | null
+          created_at: string
+          id: string
+          nome: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          ano?: string | null
+          created_at?: string
+          id?: string
+          nome: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          ano?: string | null
+          created_at?: string
+          id?: string
+          nome?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "professor" | "aluno"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +576,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["professor", "aluno"],
+    },
   },
 } as const
