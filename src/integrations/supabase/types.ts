@@ -447,6 +447,43 @@ export type Database = {
         }
         Returns: boolean
       }
+      registrar_transacao: {
+        Args: {
+          _aluno_id: string
+          _group?: string
+          _motivo: string
+          _tipo: string
+          _valor: number
+        }
+        Returns: {
+          aluno_id: string
+          data_hora: string
+          id: string
+          motivo: string | null
+          saldo_anterior: number
+          saldo_posterior: number
+          tipo: string
+          transaction_group_id: string | null
+          usuario_id: string | null
+          usuario_nome: string | null
+          valor: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "transacoes"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      transferir_pontos: {
+        Args: {
+          _destino: string
+          _motivo: string
+          _origem: string
+          _valor: number
+        }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "professor" | "aluno"
