@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LeitorRouteImport } from './routes/leitor'
+import { Route as AuthenticatedAlunosRouteImport } from './routes/_authenticated/alunos'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedTurmasRouteImport } from './routes/_authenticated/turmas'
 import { Route as ConsultaAlunoIdRouteImport } from './routes/consulta.$alunoId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,9 +37,19 @@ const LeitorRoute = LeitorRouteImport.update({
   path: '/leitor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAlunosRoute = AuthenticatedAlunosRouteImport.update({
+  id: '/alunos',
+  path: '/alunos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTurmasRoute = AuthenticatedTurmasRouteImport.update({
+  id: '/turmas',
+  path: '/turmas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const ConsultaAlunoIdRoute = ConsultaAlunoIdRouteImport.update({
@@ -50,14 +62,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
+  '/alunos': typeof AuthenticatedAlunosRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/turmas': typeof AuthenticatedTurmasRoute
   '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
+  '/alunos': typeof AuthenticatedAlunosRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/turmas': typeof AuthenticatedTurmasRoute
   '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRoutesById {
@@ -66,21 +82,39 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
+  '/_authenticated/alunos': typeof AuthenticatedAlunosRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/turmas': typeof AuthenticatedTurmasRoute
   '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/leitor' | '/painel' | '/consulta/$alunoId'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/leitor'
+    | '/alunos'
+    | '/painel'
+    | '/turmas'
+    | '/consulta/$alunoId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/leitor' | '/painel' | '/consulta/$alunoId'
+  to:
+    | '/'
+    | '/auth'
+    | '/leitor'
+    | '/alunos'
+    | '/painel'
+    | '/turmas'
+    | '/consulta/$alunoId'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/leitor'
+    | '/_authenticated/alunos'
     | '/_authenticated/painel'
+    | '/_authenticated/turmas'
     | '/consulta/$alunoId'
   fileRoutesById: FileRoutesById
 }
@@ -122,11 +156,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeitorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/alunos': {
+      id: '/_authenticated/alunos'
+      path: '/alunos'
+      fullPath: '/alunos'
+      preLoaderRoute: typeof AuthenticatedAlunosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
       fullPath: '/painel'
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/turmas': {
+      id: '/_authenticated/turmas'
+      path: '/turmas'
+      fullPath: '/turmas'
+      preLoaderRoute: typeof AuthenticatedTurmasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/consulta/$alunoId': {
@@ -140,11 +188,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAlunosRoute: typeof AuthenticatedAlunosRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedTurmasRoute: typeof AuthenticatedTurmasRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAlunosRoute: AuthenticatedAlunosRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedTurmasRoute: AuthenticatedTurmasRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
