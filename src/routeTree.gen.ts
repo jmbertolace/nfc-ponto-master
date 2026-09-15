@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LeitorRouteImport } from './routes/leitor'
+import { Route as ConsultaAlunoIdRouteImport } from './routes/consulta.$alunoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const LeitorRoute = LeitorRouteImport.update({
   path: '/leitor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsultaAlunoIdRoute = ConsultaAlunoIdRouteImport.update({
+  id: '/consulta/$alunoId',
+  path: '/consulta/$alunoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/leitor': typeof LeitorRoute
+  '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/leitor': typeof LeitorRoute
+  '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/leitor': typeof LeitorRoute
+  '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/leitor'
+  fullPaths: '/' | '/leitor' | '/consulta/$alunoId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/leitor'
-  id: '__root__' | '/' | '/leitor'
+  to: '/' | '/leitor' | '/consulta/$alunoId'
+  id: '__root__' | '/' | '/leitor' | '/consulta/$alunoId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LeitorRoute: typeof LeitorRoute
+  ConsultaAlunoIdRoute: typeof ConsultaAlunoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeitorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/consulta/$alunoId': {
+      id: '/consulta/$alunoId'
+      path: '/consulta/$alunoId'
+      fullPath: '/consulta/$alunoId'
+      preLoaderRoute: typeof ConsultaAlunoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LeitorRoute: LeitorRoute,
+  ConsultaAlunoIdRoute: ConsultaAlunoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
