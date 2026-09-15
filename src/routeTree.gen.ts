@@ -10,11 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LeitorRouteImport } from './routes/leitor'
+import { Route as AuthenticatedAlunosRouteImport } from './routes/_authenticated/alunos'
+import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedTurmasRouteImport } from './routes/_authenticated/turmas'
+import { Route as ConsultaAlunoIdRouteImport } from './routes/consulta.$alunoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeitorRoute = LeitorRouteImport.update({
@@ -22,31 +37,93 @@ const LeitorRoute = LeitorRouteImport.update({
   path: '/leitor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAlunosRoute = AuthenticatedAlunosRouteImport.update({
+  id: '/alunos',
+  path: '/alunos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
+  id: '/painel',
+  path: '/painel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTurmasRoute = AuthenticatedTurmasRouteImport.update({
+  id: '/turmas',
+  path: '/turmas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ConsultaAlunoIdRoute = ConsultaAlunoIdRouteImport.update({
+  id: '/consulta/$alunoId',
+  path: '/consulta/$alunoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
+  '/alunos': typeof AuthenticatedAlunosRoute
+  '/painel': typeof AuthenticatedPainelRoute
+  '/turmas': typeof AuthenticatedTurmasRoute
+  '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
+  '/alunos': typeof AuthenticatedAlunosRoute
+  '/painel': typeof AuthenticatedPainelRoute
+  '/turmas': typeof AuthenticatedTurmasRoute
+  '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
+  '/_authenticated/alunos': typeof AuthenticatedAlunosRoute
+  '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/turmas': typeof AuthenticatedTurmasRoute
+  '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/leitor'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/leitor'
+    | '/alunos'
+    | '/painel'
+    | '/turmas'
+    | '/consulta/$alunoId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/leitor'
-  id: '__root__' | '/' | '/leitor'
+  to:
+    | '/'
+    | '/auth'
+    | '/leitor'
+    | '/alunos'
+    | '/painel'
+    | '/turmas'
+    | '/consulta/$alunoId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/leitor'
+    | '/_authenticated/alunos'
+    | '/_authenticated/painel'
+    | '/_authenticated/turmas'
+    | '/consulta/$alunoId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   LeitorRoute: typeof LeitorRoute
+  ConsultaAlunoIdRoute: typeof ConsultaAlunoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +135,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leitor': {
       id: '/leitor'
       path: '/leitor'
@@ -65,12 +156,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeitorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/alunos': {
+      id: '/_authenticated/alunos'
+      path: '/alunos'
+      fullPath: '/alunos'
+      preLoaderRoute: typeof AuthenticatedAlunosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/painel': {
+      id: '/_authenticated/painel'
+      path: '/painel'
+      fullPath: '/painel'
+      preLoaderRoute: typeof AuthenticatedPainelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/turmas': {
+      id: '/_authenticated/turmas'
+      path: '/turmas'
+      fullPath: '/turmas'
+      preLoaderRoute: typeof AuthenticatedTurmasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/consulta/$alunoId': {
+      id: '/consulta/$alunoId'
+      path: '/consulta/$alunoId'
+      fullPath: '/consulta/$alunoId'
+      preLoaderRoute: typeof ConsultaAlunoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAlunosRoute: typeof AuthenticatedAlunosRoute
+  AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedTurmasRoute: typeof AuthenticatedTurmasRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAlunosRoute: AuthenticatedAlunosRoute,
+  AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedTurmasRoute: AuthenticatedTurmasRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   LeitorRoute: LeitorRoute,
+  ConsultaAlunoIdRoute: ConsultaAlunoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
