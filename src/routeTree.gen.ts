@@ -14,6 +14,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LeitorRouteImport } from './routes/leitor'
 import { Route as AuthenticatedAlunosRouteImport } from './routes/_authenticated/alunos'
+import { Route as AuthenticatedAtividadesRouteImport } from './routes/_authenticated/atividades'
+import { Route as AuthenticatedAvaliacoesRouteImport } from './routes/_authenticated/avaliacoes'
 import { Route as AuthenticatedCartoesRouteImport } from './routes/_authenticated/cartoes'
 import { Route as AuthenticatedHistoricoRouteImport } from './routes/_authenticated/historico'
 import { Route as AuthenticatedMaisRouteImport } from './routes/_authenticated/mais'
@@ -44,6 +46,16 @@ const LeitorRoute = LeitorRouteImport.update({
 const AuthenticatedAlunosRoute = AuthenticatedAlunosRouteImport.update({
   id: '/alunos',
   path: '/alunos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAtividadesRoute = AuthenticatedAtividadesRouteImport.update({
+  id: '/atividades',
+  path: '/atividades',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAvaliacoesRoute = AuthenticatedAvaliacoesRouteImport.update({
+  id: '/avaliacoes',
+  path: '/avaliacoes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCartoesRoute = AuthenticatedCartoesRouteImport.update({
@@ -87,6 +99,8 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
   '/alunos': typeof AuthenticatedAlunosRoute
+  '/atividades': typeof AuthenticatedAtividadesRoute
+  '/avaliacoes': typeof AuthenticatedAvaliacoesRoute
   '/cartoes': typeof AuthenticatedCartoesRoute
   '/historico': typeof AuthenticatedHistoricoRoute
   '/mais': typeof AuthenticatedMaisRoute
@@ -100,6 +114,8 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
   '/alunos': typeof AuthenticatedAlunosRoute
+  '/atividades': typeof AuthenticatedAtividadesRoute
+  '/avaliacoes': typeof AuthenticatedAvaliacoesRoute
   '/cartoes': typeof AuthenticatedCartoesRoute
   '/historico': typeof AuthenticatedHistoricoRoute
   '/mais': typeof AuthenticatedMaisRoute
@@ -115,6 +131,8 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
   '/_authenticated/alunos': typeof AuthenticatedAlunosRoute
+  '/_authenticated/atividades': typeof AuthenticatedAtividadesRoute
+  '/_authenticated/avaliacoes': typeof AuthenticatedAvaliacoesRoute
   '/_authenticated/cartoes': typeof AuthenticatedCartoesRoute
   '/_authenticated/historico': typeof AuthenticatedHistoricoRoute
   '/_authenticated/mais': typeof AuthenticatedMaisRoute
@@ -130,6 +148,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/leitor'
     | '/alunos'
+    | '/atividades'
+    | '/avaliacoes'
     | '/cartoes'
     | '/historico'
     | '/mais'
@@ -143,6 +163,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/leitor'
     | '/alunos'
+    | '/atividades'
+    | '/avaliacoes'
     | '/cartoes'
     | '/historico'
     | '/mais'
@@ -157,6 +179,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/leitor'
     | '/_authenticated/alunos'
+    | '/_authenticated/atividades'
+    | '/_authenticated/avaliacoes'
     | '/_authenticated/cartoes'
     | '/_authenticated/historico'
     | '/_authenticated/mais'
@@ -209,6 +233,20 @@ declare module '@tanstack/react-router' {
       path: '/alunos'
       fullPath: '/alunos'
       preLoaderRoute: typeof AuthenticatedAlunosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/atividades': {
+      id: '/_authenticated/atividades'
+      path: '/atividades'
+      fullPath: '/atividades'
+      preLoaderRoute: typeof AuthenticatedAtividadesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/avaliacoes': {
+      id: '/_authenticated/avaliacoes'
+      path: '/avaliacoes'
+      fullPath: '/avaliacoes'
+      preLoaderRoute: typeof AuthenticatedAvaliacoesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/cartoes': {
@@ -265,6 +303,8 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAlunosRoute: typeof AuthenticatedAlunosRoute
+  AuthenticatedAtividadesRoute: typeof AuthenticatedAtividadesRoute
+  AuthenticatedAvaliacoesRoute: typeof AuthenticatedAvaliacoesRoute
   AuthenticatedCartoesRoute: typeof AuthenticatedCartoesRoute
   AuthenticatedHistoricoRoute: typeof AuthenticatedHistoricoRoute
   AuthenticatedMaisRoute: typeof AuthenticatedMaisRoute
@@ -275,6 +315,8 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAlunosRoute: AuthenticatedAlunosRoute,
+  AuthenticatedAtividadesRoute: AuthenticatedAtividadesRoute,
+  AuthenticatedAvaliacoesRoute: AuthenticatedAvaliacoesRoute,
   AuthenticatedCartoesRoute: AuthenticatedCartoesRoute,
   AuthenticatedHistoricoRoute: AuthenticatedHistoricoRoute,
   AuthenticatedMaisRoute: AuthenticatedMaisRoute,
