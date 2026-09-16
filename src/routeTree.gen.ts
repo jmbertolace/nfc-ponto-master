@@ -14,7 +14,9 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LeitorRouteImport } from './routes/leitor'
 import { Route as AuthenticatedAlunosRouteImport } from './routes/_authenticated/alunos'
+import { Route as AuthenticatedCartoesRouteImport } from './routes/_authenticated/cartoes'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedPontosRouteImport } from './routes/_authenticated/pontos'
 import { Route as AuthenticatedTurmasRouteImport } from './routes/_authenticated/turmas'
 import { Route as ConsultaAlunoIdRouteImport } from './routes/consulta.$alunoId'
 
@@ -42,9 +44,19 @@ const AuthenticatedAlunosRoute = AuthenticatedAlunosRouteImport.update({
   path: '/alunos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCartoesRoute = AuthenticatedCartoesRouteImport.update({
+  id: '/cartoes',
+  path: '/cartoes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPontosRoute = AuthenticatedPontosRouteImport.update({
+  id: '/pontos',
+  path: '/pontos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTurmasRoute = AuthenticatedTurmasRouteImport.update({
@@ -63,7 +75,9 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
   '/alunos': typeof AuthenticatedAlunosRoute
+  '/cartoes': typeof AuthenticatedCartoesRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/pontos': typeof AuthenticatedPontosRoute
   '/turmas': typeof AuthenticatedTurmasRoute
   '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
@@ -72,7 +86,9 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
   '/alunos': typeof AuthenticatedAlunosRoute
+  '/cartoes': typeof AuthenticatedCartoesRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/pontos': typeof AuthenticatedPontosRoute
   '/turmas': typeof AuthenticatedTurmasRoute
   '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
@@ -83,7 +99,9 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/leitor': typeof LeitorRoute
   '/_authenticated/alunos': typeof AuthenticatedAlunosRoute
+  '/_authenticated/cartoes': typeof AuthenticatedCartoesRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/pontos': typeof AuthenticatedPontosRoute
   '/_authenticated/turmas': typeof AuthenticatedTurmasRoute
   '/consulta/$alunoId': typeof ConsultaAlunoIdRoute
 }
@@ -94,7 +112,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/leitor'
     | '/alunos'
+    | '/cartoes'
     | '/painel'
+    | '/pontos'
     | '/turmas'
     | '/consulta/$alunoId'
   fileRoutesByTo: FileRoutesByTo
@@ -103,7 +123,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/leitor'
     | '/alunos'
+    | '/cartoes'
     | '/painel'
+    | '/pontos'
     | '/turmas'
     | '/consulta/$alunoId'
   id:
@@ -113,7 +135,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/leitor'
     | '/_authenticated/alunos'
+    | '/_authenticated/cartoes'
     | '/_authenticated/painel'
+    | '/_authenticated/pontos'
     | '/_authenticated/turmas'
     | '/consulta/$alunoId'
   fileRoutesById: FileRoutesById
@@ -163,11 +187,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAlunosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/cartoes': {
+      id: '/_authenticated/cartoes'
+      path: '/cartoes'
+      fullPath: '/cartoes'
+      preLoaderRoute: typeof AuthenticatedCartoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
       fullPath: '/painel'
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pontos': {
+      id: '/_authenticated/pontos'
+      path: '/pontos'
+      fullPath: '/pontos'
+      preLoaderRoute: typeof AuthenticatedPontosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/turmas': {
@@ -189,13 +227,17 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAlunosRoute: typeof AuthenticatedAlunosRoute
+  AuthenticatedCartoesRoute: typeof AuthenticatedCartoesRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedPontosRoute: typeof AuthenticatedPontosRoute
   AuthenticatedTurmasRoute: typeof AuthenticatedTurmasRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAlunosRoute: AuthenticatedAlunosRoute,
+  AuthenticatedCartoesRoute: AuthenticatedCartoesRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedPontosRoute: AuthenticatedPontosRoute,
   AuthenticatedTurmasRoute: AuthenticatedTurmasRoute,
 }
 
