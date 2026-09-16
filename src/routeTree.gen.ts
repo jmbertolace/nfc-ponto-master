@@ -15,6 +15,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LeitorRouteImport } from './routes/leitor'
 import { Route as AuthenticatedAlunosRouteImport } from './routes/_authenticated/alunos'
 import { Route as AuthenticatedCartoesRouteImport } from './routes/_authenticated/cartoes'
+import { Route as AuthenticatedHistoricoRouteImport } from './routes/_authenticated/historico'
+import { Route as AuthenticatedMaisRouteImport } from './routes/_authenticated/mais'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPontosRouteImport } from './routes/_authenticated/pontos'
 import { Route as AuthenticatedTurmasRouteImport } from './routes/_authenticated/turmas'
@@ -49,6 +51,16 @@ const AuthenticatedCartoesRoute = AuthenticatedCartoesRouteImport.update({
   path: '/cartoes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedHistoricoRoute = AuthenticatedHistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMaisRoute = AuthenticatedMaisRouteImport.update({
+  id: '/mais',
+  path: '/mais',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -76,6 +88,8 @@ export interface FileRoutesByFullPath {
   '/leitor': typeof LeitorRoute
   '/alunos': typeof AuthenticatedAlunosRoute
   '/cartoes': typeof AuthenticatedCartoesRoute
+  '/historico': typeof AuthenticatedHistoricoRoute
+  '/mais': typeof AuthenticatedMaisRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/pontos': typeof AuthenticatedPontosRoute
   '/turmas': typeof AuthenticatedTurmasRoute
@@ -87,6 +101,8 @@ export interface FileRoutesByTo {
   '/leitor': typeof LeitorRoute
   '/alunos': typeof AuthenticatedAlunosRoute
   '/cartoes': typeof AuthenticatedCartoesRoute
+  '/historico': typeof AuthenticatedHistoricoRoute
+  '/mais': typeof AuthenticatedMaisRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/pontos': typeof AuthenticatedPontosRoute
   '/turmas': typeof AuthenticatedTurmasRoute
@@ -100,6 +116,8 @@ export interface FileRoutesById {
   '/leitor': typeof LeitorRoute
   '/_authenticated/alunos': typeof AuthenticatedAlunosRoute
   '/_authenticated/cartoes': typeof AuthenticatedCartoesRoute
+  '/_authenticated/historico': typeof AuthenticatedHistoricoRoute
+  '/_authenticated/mais': typeof AuthenticatedMaisRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/pontos': typeof AuthenticatedPontosRoute
   '/_authenticated/turmas': typeof AuthenticatedTurmasRoute
@@ -113,6 +131,8 @@ export interface FileRouteTypes {
     | '/leitor'
     | '/alunos'
     | '/cartoes'
+    | '/historico'
+    | '/mais'
     | '/painel'
     | '/pontos'
     | '/turmas'
@@ -124,6 +144,8 @@ export interface FileRouteTypes {
     | '/leitor'
     | '/alunos'
     | '/cartoes'
+    | '/historico'
+    | '/mais'
     | '/painel'
     | '/pontos'
     | '/turmas'
@@ -136,6 +158,8 @@ export interface FileRouteTypes {
     | '/leitor'
     | '/_authenticated/alunos'
     | '/_authenticated/cartoes'
+    | '/_authenticated/historico'
+    | '/_authenticated/mais'
     | '/_authenticated/painel'
     | '/_authenticated/pontos'
     | '/_authenticated/turmas'
@@ -194,6 +218,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCartoesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/historico': {
+      id: '/_authenticated/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof AuthenticatedHistoricoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/mais': {
+      id: '/_authenticated/mais'
+      path: '/mais'
+      fullPath: '/mais'
+      preLoaderRoute: typeof AuthenticatedMaisRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
@@ -228,6 +266,8 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAlunosRoute: typeof AuthenticatedAlunosRoute
   AuthenticatedCartoesRoute: typeof AuthenticatedCartoesRoute
+  AuthenticatedHistoricoRoute: typeof AuthenticatedHistoricoRoute
+  AuthenticatedMaisRoute: typeof AuthenticatedMaisRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPontosRoute: typeof AuthenticatedPontosRoute
   AuthenticatedTurmasRoute: typeof AuthenticatedTurmasRoute
@@ -236,6 +276,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAlunosRoute: AuthenticatedAlunosRoute,
   AuthenticatedCartoesRoute: AuthenticatedCartoesRoute,
+  AuthenticatedHistoricoRoute: AuthenticatedHistoricoRoute,
+  AuthenticatedMaisRoute: AuthenticatedMaisRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPontosRoute: AuthenticatedPontosRoute,
   AuthenticatedTurmasRoute: AuthenticatedTurmasRoute,
