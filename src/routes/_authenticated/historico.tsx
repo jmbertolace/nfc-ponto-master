@@ -111,7 +111,7 @@ function Historico() {
                 <p className="font-semibold">{a.operacao}</p>
                 <p className="text-xs text-muted-foreground">{formatDataHora(a.data_hora)}</p>
                 <p className="mt-1 text-sm">
-                  Aluno: {a.alunos?.nome ?? "—"} • De {a.valor_anterior ?? "—"} para {a.valor_novo ?? "—"}
+                  Aluno: {a.aluno_nome ?? "—"} • De {a.valor_anterior ?? "—"} para {a.valor_novo ?? "—"}
                 </p>
                 {a.motivo && <p className="text-sm text-muted-foreground">{a.motivo}</p>}
                 <p className="text-xs text-muted-foreground">
