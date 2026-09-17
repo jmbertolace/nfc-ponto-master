@@ -17,6 +17,8 @@ import { Route as AuthenticatedAlunosRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedAtividadesRouteImport } from './routes/_authenticated/atividades'
 import { Route as AuthenticatedAvaliacoesRouteImport } from './routes/_authenticated/avaliacoes'
 import { Route as AuthenticatedCartoesRouteImport } from './routes/_authenticated/cartoes'
+import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
+import { Route as AuthenticatedDesempenhoRouteImport } from './routes/_authenticated/desempenho'
 import { Route as AuthenticatedHistoricoRouteImport } from './routes/_authenticated/historico'
 import { Route as AuthenticatedMaisRouteImport } from './routes/_authenticated/mais'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
@@ -63,6 +65,17 @@ const AuthenticatedCartoesRoute = AuthenticatedCartoesRouteImport.update({
   path: '/cartoes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedConfiguracoesRoute =
+  AuthenticatedConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDesempenhoRoute = AuthenticatedDesempenhoRouteImport.update({
+  id: '/desempenho',
+  path: '/desempenho',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedHistoricoRoute = AuthenticatedHistoricoRouteImport.update({
   id: '/historico',
   path: '/historico',
@@ -102,6 +115,8 @@ export interface FileRoutesByFullPath {
   '/atividades': typeof AuthenticatedAtividadesRoute
   '/avaliacoes': typeof AuthenticatedAvaliacoesRoute
   '/cartoes': typeof AuthenticatedCartoesRoute
+  '/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/desempenho': typeof AuthenticatedDesempenhoRoute
   '/historico': typeof AuthenticatedHistoricoRoute
   '/mais': typeof AuthenticatedMaisRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -117,6 +132,8 @@ export interface FileRoutesByTo {
   '/atividades': typeof AuthenticatedAtividadesRoute
   '/avaliacoes': typeof AuthenticatedAvaliacoesRoute
   '/cartoes': typeof AuthenticatedCartoesRoute
+  '/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/desempenho': typeof AuthenticatedDesempenhoRoute
   '/historico': typeof AuthenticatedHistoricoRoute
   '/mais': typeof AuthenticatedMaisRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -134,6 +151,8 @@ export interface FileRoutesById {
   '/_authenticated/atividades': typeof AuthenticatedAtividadesRoute
   '/_authenticated/avaliacoes': typeof AuthenticatedAvaliacoesRoute
   '/_authenticated/cartoes': typeof AuthenticatedCartoesRoute
+  '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
+  '/_authenticated/desempenho': typeof AuthenticatedDesempenhoRoute
   '/_authenticated/historico': typeof AuthenticatedHistoricoRoute
   '/_authenticated/mais': typeof AuthenticatedMaisRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
@@ -151,6 +170,8 @@ export interface FileRouteTypes {
     | '/atividades'
     | '/avaliacoes'
     | '/cartoes'
+    | '/configuracoes'
+    | '/desempenho'
     | '/historico'
     | '/mais'
     | '/painel'
@@ -166,6 +187,8 @@ export interface FileRouteTypes {
     | '/atividades'
     | '/avaliacoes'
     | '/cartoes'
+    | '/configuracoes'
+    | '/desempenho'
     | '/historico'
     | '/mais'
     | '/painel'
@@ -182,6 +205,8 @@ export interface FileRouteTypes {
     | '/_authenticated/atividades'
     | '/_authenticated/avaliacoes'
     | '/_authenticated/cartoes'
+    | '/_authenticated/configuracoes'
+    | '/_authenticated/desempenho'
     | '/_authenticated/historico'
     | '/_authenticated/mais'
     | '/_authenticated/painel'
@@ -256,6 +281,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCartoesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/configuracoes': {
+      id: '/_authenticated/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof AuthenticatedConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/desempenho': {
+      id: '/_authenticated/desempenho'
+      path: '/desempenho'
+      fullPath: '/desempenho'
+      preLoaderRoute: typeof AuthenticatedDesempenhoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/historico': {
       id: '/_authenticated/historico'
       path: '/historico'
@@ -306,6 +345,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAtividadesRoute: typeof AuthenticatedAtividadesRoute
   AuthenticatedAvaliacoesRoute: typeof AuthenticatedAvaliacoesRoute
   AuthenticatedCartoesRoute: typeof AuthenticatedCartoesRoute
+  AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
+  AuthenticatedDesempenhoRoute: typeof AuthenticatedDesempenhoRoute
   AuthenticatedHistoricoRoute: typeof AuthenticatedHistoricoRoute
   AuthenticatedMaisRoute: typeof AuthenticatedMaisRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
@@ -318,6 +359,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAtividadesRoute: AuthenticatedAtividadesRoute,
   AuthenticatedAvaliacoesRoute: AuthenticatedAvaliacoesRoute,
   AuthenticatedCartoesRoute: AuthenticatedCartoesRoute,
+  AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,
+  AuthenticatedDesempenhoRoute: AuthenticatedDesempenhoRoute,
   AuthenticatedHistoricoRoute: AuthenticatedHistoricoRoute,
   AuthenticatedMaisRoute: AuthenticatedMaisRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,

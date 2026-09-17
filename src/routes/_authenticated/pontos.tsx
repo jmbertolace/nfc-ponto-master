@@ -58,7 +58,7 @@ function Pontos() {
           _origem: aluno,
           _destino: destino,
           _valor: numero,
-          _motivo: motivo || null,
+          _motivo: motivo || "",
         });
         if (error) throw error;
         return;
@@ -67,7 +67,7 @@ function Pontos() {
         _aluno_id: aluno,
         _tipo: tipo,
         _valor: op === "lancar" ? numero : -numero,
-        _motivo: motivo || null,
+        _motivo: motivo || "",
       });
       if (error) throw error;
     },

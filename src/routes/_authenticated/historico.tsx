@@ -34,14 +34,21 @@ function Historico() {
 
   const { data: auditoria } = useQuery({
     queryKey: ["auditoria"],
-    queryFn: async () =>
-      (
-        await supabase
-          .from("auditoria")
-          .select("*, alunos:aluno_id(nome)")
-          .order("data_hora", { ascending: false })
-          .limit(200)
-      ).data ?? [],
+    queryFn: async () => {
+      const registros =
+        (
+          await supabase
+            .from("auditoria")
+            .select("*")
+            .order("data_hora", { ascending: false })
+            .limit(200)
+        ).data ?? [];
+      const alunos = (await supabase.from("alunos").select("id, nome")).data ?? [];
+      return registros.map((r) => ({
+        ...r,
+        aluno_nome: alunos.find((a) => a.id === r.aluno_id)?.nome ?? null,
+      }));
+    },
   });
 
   return (
@@ -104,7 +111,7 @@ function Historico() {
                 <p className="font-semibold">{a.operacao}</p>
                 <p className="text-xs text-muted-foreground">{formatDataHora(a.data_hora)}</p>
                 <p className="mt-1 text-sm">
-                  Aluno: {a.alunos?.nome ?? "—"} • De {a.valor_anterior ?? "—"} para {a.valor_novo ?? "—"}
+                  Aluno: {a.aluno_nome ?? "—"} • De {a.valor_anterior ?? "—"} para {a.valor_novo ?? "—"}
                 </p>
                 {a.motivo && <p className="text-sm text-muted-foreground">{a.motivo}</p>}
                 <p className="text-xs text-muted-foreground">
